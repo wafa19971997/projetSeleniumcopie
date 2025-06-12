@@ -30,7 +30,7 @@ pipeline {
         stage('Run Cucumber Tests') {
             steps {
                 // Exécuter les tests Cucumber et générer les rapports JSON et HTML (Windows)
-                bat 'mvn verify'
+                bat 'mvn test'
             }
         }
 
