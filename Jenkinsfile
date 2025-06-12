@@ -50,10 +50,18 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            // Toujours publier les résultats des tests JUnit (même en cas d'échec)
-            junit '**/target/surefire-reports/*.xml'
-        }
+   post {
+  always {
+    script {
+      if (fileExists('target/cucumber-report.json')) {
+        cucumber fileIncludePattern: 'target/cucumber-report.json'
+      } else {
+        echo "Cucumber report JSON not found."
+      }
     }
+
+    junit 'target/surefire-reports/*.xml'
+  }
+}
+
 }
