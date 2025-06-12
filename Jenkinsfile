@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+    tools {
+        maven 'Maven_3.9.9' 
+    }
     environment {
         // Définir les variables pour les rapports Cucumber
         CUCUMBER_JSON = 'target\\cucumber-report.json'
