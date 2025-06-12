@@ -34,13 +34,10 @@ pipeline {
             }
         }
 
-        stage('Publish Cucumber Report') {
-            steps {
-                // Publier les résultats du rapport Cucumber dans Jenkins
-                cucumber fileIncludePattern: '**/cucumber-report.json',
-                         jsonReportDirectory: 'target'
-            }
-        }
+stage('Publish Cucumber Report') {
+    steps {
+        cucumber buildStatus: 'UNSTABLE', fileIncludePattern: '**/cucumber-report.json', sortingMethod: 'ALPHABETICAL'
+    }
 
         stage('Archive Reports') {
             steps {
