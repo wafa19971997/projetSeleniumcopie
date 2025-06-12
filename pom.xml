@@ -85,31 +85,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>io.cucumber</groupId>
-                <artifactId>cucumber-maven-plugin</artifactId>
-                <version>7.9.0</version>
-                <executions>
-                    <execution>
-                        <id>run-cucumber</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <features>src/test/resources/features</features>
-                            <glue>stepDefinitions</glue> <!-- Update to match your actual step package -->
-                            <plugin>
-                                json:target/cucumber-report.json,
-                                html:target/cucumber-report.html,
-                                junit:target/surefire-reports/cucumber-junit.xml
-                            </plugin>
-                            <tags>@click</tags>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
                 <version>3.4.0</version>
             </plugin>
