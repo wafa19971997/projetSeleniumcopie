@@ -3,8 +3,8 @@ pipeline {
 
     environment {
         // Définir les variables pour les rapports Cucumber
-        CUCUMBER_JSON = 'target/cucumber-report.json'
-        CUCUMBER_HTML = 'target/cucumber-report.html'
+        CUCUMBER_JSON = 'target\\cucumber-report.json'
+        CUCUMBER_HTML = 'target\\cucumber-report.html'
     }
 
     stages {
@@ -20,16 +20,16 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                // Installer les dépendances via Maven sans exécuter les tests
-                sh 'mvn clean install -DskipTests'
+                // Installer les dépendances via Maven sans exécuter les tests (Windows)
+                bat 'mvn clean install -DskipTests'
             }
         }
 
         stage('Run Cucumber Tests') {
             steps {
-                // Exécuter les tests Cucumber et générer les rapports JSON et HTML
-                sh """
-                    mvn test \
+                // Exécuter les tests Cucumber et générer les rapports JSON et HTML (Windows)
+                bat """
+                    mvn test ^
                     -Dcucumber.options="--plugin json:${CUCUMBER_JSON} --plugin html:${CUCUMBER_HTML} --tags @click"
                 """
             }
