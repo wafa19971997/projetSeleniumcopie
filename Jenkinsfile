@@ -23,7 +23,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 // Installer les dépendances via Maven sans exécuter les tests (Windows)
-                bat 'mvn clean install -DskipTests'
+               bat 'mvn clean install -U -DskipTests'
             }
         }
 
