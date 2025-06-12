@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        maven 'Maven_3.9.9' 
+        maven 'maven' 
     }
     environment {
         // Définir les variables pour les rapports Cucumber
