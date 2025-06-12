@@ -38,7 +38,7 @@ stage('Publish Cucumber Report') {
     steps {
         cucumber buildStatus: 'UNSTABLE', fileIncludePattern: '**/cucumber-report.json', sortingMethod: 'ALPHABETICAL'
     }
-
+}
         stage('Archive Reports') {
             steps {
                 // Archiver les rapports JSON et HTML générés
