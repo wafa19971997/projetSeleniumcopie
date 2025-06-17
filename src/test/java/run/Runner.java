@@ -17,7 +17,7 @@ import io.cucumber.junit.CucumberOptions;
 		glue = { "stepDefinition", "hooks" },
 		// features= clique droite et propriete ==> copier path a partir de src/... du
 		// Package testCasesZutomationEexercice qui se trouve dans src/test/features
-		features = "src/test/features/devis/CalculAutoHTetTTC.feature", monochrome = false, publish = true, plugin = { "pretty",
+		features = "src/test/features/devis", monochrome = false, publish = true, plugin = { "pretty",
 				"io.qameta.allure.cucumber7.jvm.AllureCucumber7Plugin" ,
 				"html:target/cucumber-report.html", "json:target/cucumber-report.json",
 				"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:" })
