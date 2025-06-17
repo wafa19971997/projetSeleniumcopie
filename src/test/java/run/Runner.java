@@ -10,7 +10,7 @@ import io.cucumber.junit.CucumberOptions;
 //@CucumberOptions(tags = "@Erudaxis_NavigationDevis" + "" + "" + "",
 //@CucumberOptions(tags = "@TC4" + "" + "" + "",
 //@CucumberOptions(tags = "@TC6"
-@CucumberOptions(tags = "@TC6"
+@CucumberOptions(tags = "@CalculDevis"
 		+ "" + "" + "" + "",
 		// glue = cest ou je trouve les annotation cucumber (@when /@then /
 		// @before/@after ...)
