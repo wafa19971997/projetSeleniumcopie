@@ -3,6 +3,7 @@ package stepDefinition;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
+import hooks.DriverManager;
 import hooks.SetUp;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -11,7 +12,7 @@ import pageObject.SallesPageObject;
 
 public class SallesStepDef {
 
-	WebDriver driver = SetUp.driver;
+	WebDriver driver = DriverManager.driver;
 
 	SallesPageObject ajout = new SallesPageObject(driver);
 	

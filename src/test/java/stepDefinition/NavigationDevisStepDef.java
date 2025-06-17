@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import hooks.DriverManager;
 import hooks.SetUp;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -11,7 +12,7 @@ import pageObject.NavigationDevis;
 
 public class NavigationDevisStepDef {
 
-	WebDriver driver = SetUp.driver;
+	WebDriver driver = DriverManager.driver;
 
 	NavigationDevis devis = new NavigationDevis(driver);
 

@@ -2,6 +2,7 @@ package stepDefinition;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
+import hooks.DriverManager;
 import hooks.SetUp;
 import pageObject.pageHome;
 import io.cucumber.java.en.Given;
@@ -10,7 +11,7 @@ import io.cucumber.java.en.When;
 
 public class PageHomeStepDef {
 
-	WebDriver driver=SetUp.driver;
+	WebDriver driver=DriverManager.driver;
 	pageHome log=new pageHome (driver);
 	
 	@Given("je saisis url {string}")

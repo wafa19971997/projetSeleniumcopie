@@ -5,6 +5,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 
+import hooks.DriverManager;
 import hooks.SetUp;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -14,7 +15,7 @@ import pageObject.NavigationDevis;
 
 public class DevisCasCorrecteTC3StepDef {
 
-	WebDriver driver = SetUp.driver;
+	WebDriver driver = DriverManager.driver;
 
 	NavigationDevis devis = new NavigationDevis(driver);
 	Devis formDevis = new Devis(driver);
