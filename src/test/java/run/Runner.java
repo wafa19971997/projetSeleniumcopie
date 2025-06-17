@@ -10,14 +10,14 @@ import io.cucumber.junit.CucumberOptions;
 //@CucumberOptions(tags = "@Erudaxis_NavigationDevis" + "" + "" + "",
 //@CucumberOptions(tags = "@TC4" + "" + "" + "",
 //@CucumberOptions(tags = "@TC6"
-@CucumberOptions(tags = "@CalculDevis"
+@CucumberOptions(tags = "@Salles"
 		+ "" + "" + "" + "",
 		// glue = cest ou je trouve les annotation cucumber (@when /@then /
 		// @before/@after ...)
 		glue = { "stepDefinition", "hooks" },
 		// features= clique droite et propriete ==> copier path a partir de src/... du
 		// Package testCasesZutomationEexercice qui se trouve dans src/test/features
-		features = "src/test/features/devis", monochrome = false, publish = true, plugin = { "pretty",
+		features = "src/test/features/salles", monochrome = false, publish = true, plugin = { "pretty",
 				"io.qameta.allure.cucumber7.jvm.AllureCucumber7Plugin" ,
 				"html:target/cucumber-report.html", "json:target/cucumber-report.json",
 				"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:" })
