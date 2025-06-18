@@ -20,14 +20,21 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-               bat 'mvn clean install -U -DskipTests'
+                bat 'mvn clean install -U -DskipTests'
             }
         }
 
         stage('Run Cucumber Tests') {
             steps {
-                // Exécuter les tests Cucumber et générer le rapport
                 bat 'mvn test'
+            }
+        }
+
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('MySonar') {
+                    bat 'mvn sonar:sonar'
+                }
             }
         }
 
@@ -39,16 +46,15 @@ pipeline {
     }
 
     post {
-      always {
-        script {
-          if (fileExists('target/cucumber-report.json')) {
-            cucumber fileIncludePattern: 'target/cucumber-report.json'
-          } else {
-            echo "Cucumber report JSON not found."
-          }
+        always {
+            script {
+                if (fileExists('target/cucumber-report.json')) {
+                    cucumber fileIncludePattern: 'target/cucumber-report.json'
+                } else {
+                    echo "Cucumber report JSON not found."
+                }
+            }
+            junit 'target/surefire-reports/**/*.xml'
         }
-        junit 'target/surefire-reports/**/*.xml'
-      }
     }
 }
-
