@@ -20,27 +20,27 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                bat 'mvn clean install -U -DskipTests'
+                sh 'mvn clean install -U -DskipTests'
             }
         }
 
         stage('Run Cucumber Tests') {
             steps {
-                bat 'mvn test'
+                sh 'mvn test'
             }
         }
 
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('MySonar') {
-                    bat 'mvn sonar:sonar'
+                    sh 'mvn sonar:sonar'
                 }
             }
         }
 
         stage('Archive Reports') {
             steps {
-                archiveArtifacts artifacts: "${CUCUMBER_JSON}, ${CUCUMBER_HTML}", allowEmptyArchive: false
+                archiveArtifacts artifacts: "${CUCUMBER_JSON}, ${CUCUMBER_HTML}", allowEmptyArchive: true
             }
         }
     }
@@ -48,12 +48,15 @@ pipeline {
     post {
         always {
             script {
-                if (fileExists('target/cucumber-report.json')) {
-                    cucumber fileIncludePattern: 'target/cucumber-report.json'
+                if (fileExists("${CUCUMBER_JSON}")) {
+                    cucumber fileIncludePattern: "${CUCUMBER_JSON}"
                 } else {
                     echo "Cucumber report JSON not found."
                 }
             }
+
+            // Attention : Cucumber ne génère pas de .xml par défaut
+            // Utiliser uniquement si tu as des rapports JUnit
             junit 'target/surefire-reports/**/*.xml'
         }
     }
