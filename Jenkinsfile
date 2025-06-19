@@ -40,7 +40,7 @@ pipeline {
 
         stage('Archive Reports') {
             steps {
-                archiveArtifacts artifacts: "${CUCUMBER_JSON}, ${CUCUMBER_HTML}", allowEmptyArchive: true
+                archiveArtifacts artifacts: "${CUCUMBER_JSON}, ${CUCUMBER_HTML}", allowEmptyArchive: false
             }
         }
     }
@@ -48,15 +48,12 @@ pipeline {
     post {
         always {
             script {
-                if (fileExists("${CUCUMBER_JSON}")) {
-                    cucumber fileIncludePattern: "${CUCUMBER_JSON}"
+                if (fileExists('target/cucumber-report.json')) {
+                    cucumber fileIncludePattern: 'target/cucumber-report.json'
                 } else {
                     echo "Cucumber report JSON not found."
                 }
             }
-
-            // Attention : Cucumber ne génère pas de .xml par défaut
-            // Utiliser uniquement si tu as des rapports JUnit
             junit 'target/surefire-reports/**/*.xml'
         }
     }
