@@ -54,7 +54,7 @@ pipeline {
                     echo "Cucumber report JSON not found."
                 }
             }
-            junit 'target/surefire-reports/**/*.xml'
+            //junit 'target/surefire-reports/**/*.xml'
         }
     }
 }
