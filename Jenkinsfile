@@ -23,35 +23,6 @@ pipeline {
                 sh 'mvn clean install -U -DskipTests'
             }
         }
-
-            stage('Install Chrome & ChromeDriver') {
-            steps {
-                sh '''
-            apt-get update
-            apt-get install -y wget gnupg2 apt-transport-https unzip curl software-properties-common
-
-            # Ajouter le dépôt de Google Chrome
-            wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-            echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
-
-            apt-get update
-            apt-get install -y google-chrome-stable
-
-            # Extraire la version exacte de Chrome
-            CHROME_VERSION=$(google-chrome --version | grep -oP '\\d+\\.\\d+\\.\\d+\\.\\d+')
-
-            # Télécharger ChromeDriver correspondant
-            wget -q https://storage.googleapis.com/chrome-for-testing-public/$CHROME_VERSION/linux64/chromedriver-linux64.zip
-            unzip chromedriver-linux64.zip
-            mv chromedriver-linux64/chromedriver /usr/local/bin/
-            chmod +x /usr/local/bin/chromedriver
-
-            google-chrome --version
-            chromedriver --version
-        '''
-            }
-        }
-
         stage('Run Cucumber Tests') {
             steps {
                 sh 'mvn test'
