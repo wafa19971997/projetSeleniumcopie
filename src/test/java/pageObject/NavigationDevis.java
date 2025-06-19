@@ -96,6 +96,7 @@ public class NavigationDevis {
 
 	public void cliquer_sur_le_bt_Facturations() {
 		wait.until(ExpectedConditions.visibilityOf(bt_Facturations));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
 		bt_Facturations.click();
 	}
@@ -104,11 +105,15 @@ public class NavigationDevis {
 	
 
 	public void cliquer_sur_le_bt_Devis() {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
 		bt_Devis.click();
 	}
 
 	public void cliquer_sur_le_bt_Nouveau_Devi() {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+	    wait.until(ExpectedConditions.elementToBeClickable(bt_Nouveau_Devi));
 		bt_Nouveau_Devi.click();
 	}
 
