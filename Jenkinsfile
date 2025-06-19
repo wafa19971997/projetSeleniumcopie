@@ -27,26 +27,28 @@ pipeline {
             stage('Install Chrome & ChromeDriver') {
             steps {
                 sh '''
-                  # Installer Google Chrome
-                  wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-                  sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
-                  sudo apt-get update
-                  sudo apt-get install -y google-chrome-stable
+            apt-get update
+            apt-get install -y wget gnupg2 apt-transport-https unzip curl software-properties-common
 
-                  # Récupérer la version exacte de Chrome
-                  CHROME_VERSION=$(google-chrome --version | grep -oP '\\d+\\.\\d+\\.\\d+\\.\\d+')
+            # Ajouter le dépôt de Google Chrome
+            wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+            echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
 
-                  # Télécharger ChromeDriver compatible
-                  echo "Chrome version: $CHROME_VERSION"
-                  wget -q https://storage.googleapis.com/chrome-for-testing-public/$CHROME_VERSION/linux64/chromedriver-linux64.zip
-                  unzip chromedriver-linux64.zip
-                  sudo mv chromedriver-linux64/chromedriver /usr/local/bin/
-                  sudo chmod +x /usr/local/bin/chromedriver
+            apt-get update
+            apt-get install -y google-chrome-stable
 
-                  # Vérification
-                  google-chrome --version
-                  chromedriver --version
-                '''
+            # Extraire la version exacte de Chrome
+            CHROME_VERSION=$(google-chrome --version | grep -oP '\\d+\\.\\d+\\.\\d+\\.\\d+')
+
+            # Télécharger ChromeDriver correspondant
+            wget -q https://storage.googleapis.com/chrome-for-testing-public/$CHROME_VERSION/linux64/chromedriver-linux64.zip
+            unzip chromedriver-linux64.zip
+            mv chromedriver-linux64/chromedriver /usr/local/bin/
+            chmod +x /usr/local/bin/chromedriver
+
+            google-chrome --version
+            chromedriver --version
+        '''
             }
         }
 
